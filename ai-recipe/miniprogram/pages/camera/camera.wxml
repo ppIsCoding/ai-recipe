@@ -1,0 +1,88 @@
+<!-- 拍照识别页面 -->
+<view class="container">
+  <!-- 顶部提示 -->
+  <view class="tip-bar">
+    <text class="tip-text">将食材放入画面中，拍照识别</text>
+  </view>
+
+  <!-- 相机预览区域 -->
+  <view class="camera-area">
+    <camera 
+      class="camera-preview" 
+      device-position="back" 
+      flash="auto" 
+      binderror="onCameraError"
+      wx:if="{{showCamera}}"
+    >
+      <cover-view class="camera-overlay">
+        <cover-view class="scan-frame"></cover-view>
+      </cover-view>
+    </camera>
+    
+    <!-- 已拍摄的图片预览 -->
+    <image 
+      class="image-preview" 
+      src="{{tempImagePath}}" 
+      mode="aspectFit"
+      wx:if="{{!showCamera && tempImagePath}}"
+    ></image>
+    
+    <!-- 空状态 -->
+    <view class="empty-camera" wx:if="{{!showCamera && !tempImagePath}}">
+      <image src="/images/camera.png" mode="aspectFit"></image>
+      <text>点击下方按钮拍照</text>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons">
+    <!-- 从相册选择 -->
+    <view class="btn-action" bindtap="chooseFromAlbum">
+      <view class="btn-icon-wrapper">
+        <image src="/images/album.png" mode="aspectFit"></image>
+      </view>
+      <text class="btn-label">相册</text>
+    </view>
+    
+    <!-- 拍照按钮 -->
+    <view class="btn-action btn-capture-wrapper" bindtap="takePhoto">
+      <view class="btn-capture">
+        <view class="capture-inner"></view>
+      </view>
+      <text class="btn-label">拍照</text>
+    </view>
+    
+    <!-- 重新拍照 -->
+    <view class="btn-action" bindtap="retakePhoto" wx:if="{{tempImagePath}}">
+      <view class="btn-icon-wrapper">
+        <image src="/images/refresh.png" mode="aspectFit"></image>
+      </view>
+      <text class="btn-label">重拍</text>
+    </view>
+  </view>
+
+  <!-- 识别按钮 -->
+  <view class="recognize-btn" wx:if="{{tempImagePath}}" bindtap="startRecognize">
+    <text class="recognize-text">{{isRecognizing ? '识别中...' : '开始识别'}}</text>
+    <view class="loading-spinner" wx:if="{{isRecognizing}}"></view>
+  </view>
+
+  <!-- 提示信息 -->
+  <view class="tips-section">
+    <view class="tips-title">拍照小贴士</view>
+    <view class="tips-list">
+      <view class="tip-item">
+        <text class="tip-icon">1</text>
+        <text class="tip-content">将食材平放在桌面上</text>
+      </view>
+      <view class="tip-item">
+        <text class="tip-icon">2</text>
+        <text class="tip-content">确保光线充足，避免阴影</text>
+      </view>
+      <view class="tip-item">
+        <text class="tip-icon">3</text>
+        <text class="tip-content">多种食材可以一起拍照</text>
+      </view>
+    </view>
+  </view>
+</view>

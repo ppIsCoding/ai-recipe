@@ -1,0 +1,105 @@
+<!-- 营养分析页面 -->
+<view class="container">
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading}}">
+    <icon-svg name="microscope" size="64"></icon-svg>
+    <text class="loading-text">AI正在分析营养成分...</text>
+  </view>
+
+  <!-- 分析结果 -->
+  <view class="result" wx:if="{{!loading}}">
+    <!-- 食材标签 -->
+    <view class="section">
+      <text class="section-title">分析食材</text>
+      <view class="food-tags">
+        <text class="tag" wx:for="{{foods}}" wx:key="*this">{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 总营养概览 -->
+    <view class="section">
+      <text class="section-title">营养总览</text>
+      <view class="nutrition-grid">
+        <view class="nutrition-item">
+          <text class="nutrition-value">{{total.calories || 0}}</text>
+          <text class="nutrition-unit">kcal</text>
+          <text class="nutrition-label">热量</text>
+        </view>
+        <view class="nutrition-item">
+          <text class="nutrition-value">{{total.protein || 0}}</text>
+          <text class="nutrition-unit">g</text>
+          <text class="nutrition-label">蛋白质</text>
+        </view>
+        <view class="nutrition-item">
+          <text class="nutrition-value">{{total.fat || 0}}</text>
+          <text class="nutrition-unit">g</text>
+          <text class="nutrition-label">脂肪</text>
+        </view>
+        <view class="nutrition-item">
+          <text class="nutrition-value">{{total.carbs || 0}}</text>
+          <text class="nutrition-unit">g</text>
+          <text class="nutrition-label">碳水</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 每种食材详情 -->
+    <view class="section" wx:if="{{nutritionFoods.length > 0}}">
+      <text class="section-title">食材详情</text>
+      <view class="food-list">
+        <view class="food-item" wx:for="{{nutritionFoods}}" wx:key="name">
+          <view class="food-header">
+            <text class="food-name">{{item.name}}</text>
+            <text class="food-calories">{{item.calories}}kcal/100g</text>
+          </view>
+          <view class="food-nutrition">
+            <view class="bar-item">
+              <text class="bar-label">蛋白质</text>
+              <view class="bar-track">
+                <view class="bar-fill protein" style="width: {{item.protein * 3}}%"></view>
+              </view>
+              <text class="bar-value">{{item.protein}}g</text>
+            </view>
+            <view class="bar-item">
+              <text class="bar-label">脂肪</text>
+              <view class="bar-track">
+                <view class="bar-fill fat" style="width: {{item.fat * 3}}%"></view>
+              </view>
+              <text class="bar-value">{{item.fat}}g</text>
+            </view>
+            <view class="bar-item">
+              <text class="bar-label">碳水</text>
+              <view class="bar-track">
+                <view class="bar-fill carbs" style="width: {{item.carbs * 3}}%"></view>
+              </view>
+              <text class="bar-value">{{item.carbs}}g</text>
+            </view>
+          </view>
+          <text class="food-vitamins" wx:if="{{item.vitamins}}">维生素：{{item.vitamins}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 健康建议 -->
+    <view class="section" wx:if="{{healthAdvice}}">
+      <view class="section-title-row">
+        <icon-svg name="lightbulb" size="32"></icon-svg>
+        <text class="section-title">健康建议</text>
+      </view>
+      <view class="advice-card">
+        <text class="advice-text">{{healthAdvice}}</text>
+      </view>
+    </view>
+
+    <!-- 推荐做法 -->
+    <view class="section" wx:if="{{recommendedRecipes.length > 0}}">
+      <view class="section-title-row">
+        <icon-svg name="utensils" size="32"></icon-svg>
+        <text class="section-title">推荐做法</text>
+      </view>
+      <view class="recipe-tags">
+        <text class="recipe-tag" wx:for="{{recommendedRecipes}}" wx:key="*this">{{item}}</text>
+      </view>
+    </view>
+  </view>
+</view>

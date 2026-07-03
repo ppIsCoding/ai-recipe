@@ -1,0 +1,1 @@
+<view class="icon-svg icon-{{name}}" style="width: {{size}}rpx; height: {{size}}rpx;"></view>

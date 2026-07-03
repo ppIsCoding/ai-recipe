@@ -1,0 +1,107 @@
+<!-- 个人信息编辑页面 -->
+<view class="container">
+  <view class="form-section">
+    <view class="form-title">基本信息</view>
+    
+    <!-- 性别 -->
+    <view class="form-group">
+      <text class="form-label">性别</text>
+      <view class="gender-options">
+        <view 
+          class="gender-btn {{gender === item.value ? 'active' : ''}}" 
+          wx:for="{{genderOptions}}" 
+          wx:key="value"
+          bindtap="selectGender"
+          data-value="{{item.value}}"
+        >
+          <text>{{item.label}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 年龄 -->
+    <view class="form-group">
+      <text class="form-label">年龄</text>
+      <input 
+        class="form-input" 
+        type="number" 
+        placeholder="请输入年龄" 
+        value="{{age}}"
+        bindinput="onAgeInput"
+      />
+    </view>
+
+    <!-- 身高 -->
+    <view class="form-group">
+      <text class="form-label">身高 (cm)</text>
+      <input 
+        class="form-input" 
+        type="digit" 
+        placeholder="请输入身高" 
+        value="{{height}}"
+        bindinput="onHeightInput"
+      />
+    </view>
+
+    <!-- 体重 -->
+    <view class="form-group">
+      <text class="form-label">体重 (kg)</text>
+      <input 
+        class="form-input" 
+        type="digit" 
+        placeholder="请输入体重" 
+        value="{{weight}}"
+        bindinput="onWeightInput"
+      />
+    </view>
+  </view>
+
+  <!-- 活动量 -->
+  <view class="form-section">
+    <view class="form-title">活动量</view>
+    <view class="activity-options">
+      <view 
+        class="activity-item {{activityLevel === item.value ? 'active' : ''}}" 
+        wx:for="{{activityOptions}}" 
+        wx:key="value"
+        bindtap="selectActivity"
+        data-value="{{item.value}}"
+      >
+        <view class="activity-info">
+          <text class="activity-label">{{item.label}}</text>
+          <text class="activity-desc">{{item.desc}}</text>
+        </view>
+        <view class="activity-check" wx:if="{{activityLevel === item.value}}">
+          <text>✓</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 健康目标 -->
+  <view class="form-section">
+    <view class="form-title">健康目标</view>
+    <view class="goal-options">
+      <view 
+        class="goal-item {{healthGoal === item.value ? 'active' : ''}}" 
+        wx:for="{{goalOptions}}" 
+        wx:key="value"
+        bindtap="selectGoal"
+        data-value="{{item.value}}"
+      >
+        <text class="goal-icon">{{item.icon}}</text>
+        <text class="goal-label">{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 说明 -->
+  <view class="form-tip">
+    <text class="tip-text">💡 完善个人信息后，系统将根据《中国居民膳食指南2022》为您计算BMI和每日推荐热量，提供更精准的健康菜谱推荐。</text>
+  </view>
+
+  <!-- 保存按钮 -->
+  <view class="btn-save" bindtap="saveProfile">
+    <text>保存</text>
+  </view>
+</view>

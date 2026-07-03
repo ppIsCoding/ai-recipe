@@ -1,0 +1,204 @@
+/* 营养分析页面样式 */
+.container {
+  min-height: 100vh;
+  background: var(--color-background);
+  padding: 24rpx;
+}
+
+/* 加载状态 */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 300rpx;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: var(--color-text-muted);
+  margin-top: 24rpx;
+}
+
+/* 区块 */
+.section {
+  margin-bottom: 32rpx;
+}
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  display: block;
+}
+
+/* 食材标签 */
+.food-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.tag {
+  font-size: 24rpx;
+  color: #1A1A1A;
+  background: #F5F5F3;
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+}
+
+/* 营养总览 */
+.nutrition-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16rpx;
+}
+
+.nutrition-item {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nutrition-value {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1A1A1A;
+}
+
+.nutrition-unit {
+  font-size: 20rpx;
+  color: #8A8A8A;
+  margin-top: 4rpx;
+}
+
+.nutrition-label {
+  font-size: 22rpx;
+  color: #8A8A8A;
+  margin-top: 8rpx;
+}
+
+/* 食材详情 */
+.food-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.food-item {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 20rpx;
+}
+
+.food-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.food-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1A1A1A;
+}
+
+.food-calories {
+  font-size: 24rpx;
+  color: #D4943A;
+}
+
+.food-nutrition {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.bar-item {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.bar-label {
+  font-size: 22rpx;
+  color: #8A8A8A;
+  width: 60rpx;
+}
+
+.bar-track {
+  flex: 1;
+  height: 12rpx;
+  background: #F0F0F0;
+  border-radius: 6rpx;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 6rpx;
+  transition: width 0.5s ease;
+}
+
+.bar-fill.protein { background: #7A9B76; }
+.bar-fill.fat { background: #D4943A; }
+.bar-fill.carbs { background: #C75B3A; }
+
+.bar-value {
+  font-size: 22rpx;
+  color: #8A8A8A;
+  width: 60rpx;
+  text-align: right;
+}
+
+.food-vitamins {
+  font-size: 22rpx;
+  color: #8A8A8A;
+  margin-top: 12rpx;
+  display: block;
+}
+
+/* 健康建议 */
+.advice-card {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  border-left: 6rpx solid #7A9B76;
+}
+
+.advice-text {
+  font-size: 26rpx;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* 推荐做法 */
+.recipe-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.recipe-tag {
+  font-size: 26rpx;
+  color: #FFFFFF;
+  background: #1A1A1A;
+  padding: 12rpx 24rpx;
+  border-radius: 24rpx;
+}

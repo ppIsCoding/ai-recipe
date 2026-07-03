@@ -1,0 +1,162 @@
+<!-- 个人中心 -->
+<view class="container">
+  <!-- 用户信息区域 -->
+  <view class="user-section">
+    <view class="user-info" wx:if="{{isLoggedIn}}">
+      <image class="user-avatar" src="{{userInfo.avatar_url || '/images/user.png'}}" mode="aspectFill"></image>
+      <view class="user-details">
+        <text class="user-name">{{userInfo.nickname || '用户'}}</text>
+        <text class="user-health-goal" wx:if="{{healthGoalLabel}}">🎯 {{healthGoalLabel}}</text>
+      </view>
+    </view>
+    <view class="login-prompt" wx:else bindtap="login">
+      <image class="login-avatar" src="/images/user.png" mode="aspectFill"></image>
+      <text class="login-text">点击登录</text>
+    </view>
+  </view>
+
+  <!-- BMI 卡片 -->
+  <view class="bmi-card" wx:if="{{isLoggedIn && bmi}}" bindtap="goToHealthAnalysis">
+    <view class="bmi-header">
+      <text class="bmi-title">健康分析</text>
+      <text class="bmi-more">详情 ></text>
+    </view>
+    <view class="bmi-content">
+      <view class="bmi-main">
+        <text class="bmi-value">{{bmi}}</text>
+        <text class="bmi-label">BMI</text>
+      </view>
+      <view class="bmi-status {{bmiStatusClass}}">
+        <text>{{bmiStatus}}</text>
+      </view>
+    </view>
+    <view class="bmi-footer" wx:if="{{targetCalories > 0}}">
+      <text class="calories-label">每日推荐热量</text>
+      <text class="calories-value">{{targetCalories}} kcal</text>
+    </view>
+  </view>
+
+  <!-- 未填写个人信息提示 -->
+  <view class="profile-hint" wx:if="{{isLoggedIn && !bmi}}" bindtap="goToProfileEdit">
+    <view class="hint-content">
+      <text class="hint-icon">📋</text>
+      <view class="hint-text">
+        <text class="hint-title">完善个人信息</text>
+        <text class="hint-desc">填写身高体重，获取个性化健康建议</text>
+      </view>
+    </view>
+    <text class="hint-arrow">></text>
+  </view>
+
+  <!-- 统计数据 -->
+  <view class="stats-section" wx:if="{{isLoggedIn}}">
+    <view class="stat-item" bindtap="goToFavorite">
+      <text class="stat-value">{{stats.favoriteCount}}</text>
+      <text class="stat-label">收藏菜谱</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item" bindtap="goToHistory">
+      <text class="stat-value">{{stats.cookCount}}</text>
+      <text class="stat-label">做菜次数</text>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="menu-item" bindtap="goToProfileEdit">
+      <text class="menu-icon">👤</text>
+      <text class="menu-text">个人信息</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goToHealthAnalysis" wx:if="{{bmi}}">
+      <text class="menu-icon">📊</text>
+      <text class="menu-text">健康分析</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goToFavorite">
+      <text class="menu-icon">❤️</text>
+      <text class="menu-text">我的收藏</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goToHistory">
+      <text class="menu-icon">📖</text>
+      <text class="menu-text">做菜历史</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goToPreference">
+      <text class="menu-icon">🍽️</text>
+      <text class="menu-text">口味偏好</text>
+      <text class="menu-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 其他菜单 -->
+  <view class="menu-section">
+    <view class="menu-item" bindtap="clearCache">
+      <text class="menu-icon">🗑️</text>
+      <text class="menu-text">清除缓存</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goToAbout">
+      <text class="menu-icon">ℹ️</text>
+      <text class="menu-text">关于我们</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="logout" wx:if="{{isLoggedIn}}">
+      <text class="menu-icon">🚪</text>
+      <text class="menu-text">退出登录</text>
+      <text class="menu-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 膳食指南标识 -->
+  <view class="guide-badge">
+    <text class="guide-badge-text">基于《中国居民膳食指南2022》</text>
+  </view>
+
+  <!-- 偏好设置弹窗 -->
+  <view class="modal-mask" wx:if="{{showPreference}}" bindtap="closePreference">
+    <view class="modal-content" catchtap="preventClose">
+      <view class="modal-header">
+        <text class="modal-title">口味偏好设置</text>
+        <view class="modal-close" bindtap="closePreference">
+          <text>×</text>
+        </view>
+      </view>
+
+      <view class="preference-section">
+        <text class="preference-label">口味偏好</text>
+        <view class="preference-tags">
+          <view 
+            class="preference-tag {{item.selected ? 'selected' : ''}}" 
+            wx:for="{{tasteOptions}}" 
+            wx:key="name"
+            bindtap="toggleTaste"
+            data-index="{{index}}"
+          >
+            <text>{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="preference-section">
+        <text class="preference-label">忌口设置</text>
+        <view class="preference-tags">
+          <view 
+            class="preference-tag {{item.selected ? 'selected' : ''}}" 
+            wx:for="{{avoidOptions}}" 
+            wx:key="name"
+            bindtap="toggleAvoid"
+            data-index="{{index}}"
+          >
+            <text>{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="btn-save" bindtap="savePreference">
+        <text>保存设置</text>
+      </view>
+    </view>
+  </view>
+</view>

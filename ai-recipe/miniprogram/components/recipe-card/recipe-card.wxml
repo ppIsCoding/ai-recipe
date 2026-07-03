@@ -1,0 +1,19 @@
+<!-- 菜谱卡片组件 -->
+<view class="recipe-card" bindtap="onTap" data-id="{{recipe.id}}">
+  <image class="recipe-card__image" src="{{recipe.image}}" mode="aspectFill"></image>
+  <view class="recipe-card__content">
+    <text class="recipe-card__name">{{recipe.name}}</text>
+    <text class="recipe-card__desc">{{recipe.desc}}</text>
+    <view class="recipe-card__meta">
+      <view class="recipe-card__tag" wx:if="{{recipe.time}}">
+        <text>{{recipe.time}}</text>
+      </view>
+      <view class="recipe-card__tag" wx:if="{{recipe.difficulty}}">
+        <text>{{recipe.difficulty}}</text>
+      </view>
+      <view class="recipe-card__match" wx:if="{{recipe.match}}">
+        <text>匹配度 {{recipe.match}}%</text>
+      </view>
+    </view>
+  </view>
+</view>

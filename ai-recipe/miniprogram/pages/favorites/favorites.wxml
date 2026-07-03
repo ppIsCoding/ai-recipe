@@ -1,0 +1,27 @@
+<!-- 收藏列表页面 -->
+<view class="container">
+  <!-- 空状态 -->
+  <view class="empty" wx:if="{{!loading && favorites.length === 0}}">
+    <icon-svg name="heart" size="80"></icon-svg>
+    <text class="empty-text">还没有收藏的菜谱</text>
+    <view class="empty-btn" bindtap="goBack">去看看</view>
+  </view>
+
+  <!-- 收藏列表 -->
+  <view class="list" wx:if="{{favorites.length > 0}}">
+    <view class="item" wx:for="{{favorites}}" wx:key="id" bindtap="goToRecipe" data-id="{{item.id}}">
+      <image class="item-image" src="{{item.image}}" mode="aspectFill"></image>
+      <view class="item-info">
+        <text class="item-name">{{item.name}}</text>
+        <text class="item-desc">{{item.desc}}</text>
+        <view class="item-meta">
+          <text class="meta-tag">{{item.time}}</text>
+          <text class="meta-tag">{{item.difficulty}}</text>
+        </view>
+      </view>
+      <view class="item-action" catchtap="removeFavorite" data-id="{{item.id}}">
+        <icon-svg name="close" size="32"></icon-svg>
+      </view>
+    </view>
+  </view>
+</view>

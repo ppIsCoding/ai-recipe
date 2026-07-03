@@ -1,0 +1,60 @@
+{
+  "plugins": {
+    "WechatSI": {
+      "version": "0.3.7",
+      "provider": "wx069ba97219f66d99"
+    }
+  },
+  "pages": [
+    "pages/index/index",
+    "pages/camera/camera",
+    "pages/result/result",
+    "pages/recipe/recipe",
+    "pages/ai-chat/ai-chat",
+    "pages/profile/profile",
+    "pages/profile-edit/profile-edit",
+    "pages/health-analysis/health-analysis",
+    "pages/favorites/favorites",
+    "pages/history/history",
+    "pages/nutrition/nutrition"
+  ],
+  "usingComponents": {
+    "icon-svg": "/components/icon-svg/icon-svg"
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#E8722A",
+    "navigationBarTitleText": "快手小厨",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#FBF7F4"
+  },
+  "tabBar": {
+    "color": "#A89888",
+    "selectedColor": "#E8722A",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tab-home.png",
+        "selectedIconPath": "images/tab-home-active.png"
+      },
+      {
+        "pagePath": "pages/ai-chat/ai-chat",
+        "text": "AI助手",
+        "iconPath": "images/chef-hat-one.png",
+        "selectedIconPath": "images/chef-hat-one-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/tab-user.png",
+        "selectedIconPath": "images/tab-user-active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}

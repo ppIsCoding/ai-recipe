@@ -1,0 +1,100 @@
+/* 收藏列表页面样式 */
+.container {
+  min-height: 100vh;
+  background: #FAFAF8;
+  padding: 20rpx;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 300rpx;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 40rpx;
+}
+
+.empty-btn {
+  padding: 16rpx 48rpx;
+  background: #1A1A1A;
+  color: #FFF;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  gap: 20rpx;
+}
+
+.item-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 12rpx;
+  flex-shrink: 0;
+}
+
+.item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.item-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1A1A1A;
+}
+
+.item-desc {
+  font-size: 24rpx;
+  color: #8A8A8A;
+}
+
+.item-meta {
+  display: flex;
+  gap: 12rpx;
+  margin-top: 4rpx;
+}
+
+.meta-tag {
+  font-size: 22rpx;
+  color: #8A8A8A;
+  background: #F5F5F3;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+}
+
+.item-action {
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-icon {
+  font-size: 24rpx;
+  color: #CCC;
+}

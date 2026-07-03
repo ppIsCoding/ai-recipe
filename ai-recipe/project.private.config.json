@@ -1,0 +1,24 @@
+{
+  "libVersion": "2.25.4",
+  "projectname": "ai-recipe",
+  "condition": {},
+  "setting": {
+    "skylineRenderEnable": false,
+    "useStaticServer": false,
+    "useLanDebug": false,
+    "ignoreDevUnusedFiles": true,
+    "bigPackageSizeSupport": false,
+    "urlCheck": false,
+    "coverView": true,
+    "lazyloadPlaceholderEnable": false,
+    "preloadBackgroundData": false,
+    "autoAudits": false,
+    "useApiHook": true,
+    "useApiHostProcess": true,
+    "showShadowRootInWxmlPanel": true,
+    "showES6CompileOption": false,
+    "compileHotReLoad": true,
+    "checkInvalidKey": true,
+    "useIsolateContext": true
+  }
+}

@@ -1,0 +1,99 @@
+<!-- 识别结果页面 -->
+<view class="container">
+  <!-- 拍摄的图片 -->
+  <view class="image-section">
+    <image class="food-image" src="{{imagePath}}" mode="aspectFit"></image>
+    <view class="image-overlay">
+      <text class="result-count">识别到 {{foods.length}} 种食材</text>
+    </view>
+  </view>
+
+  <!-- 识别结果列表 -->
+  <view class="result-section">
+    <view class="section-title-row">
+      <icon-svg name="food" size="32"></icon-svg>
+      <text class="section-title">识别结果</text>
+    </view>
+    <view class="food-list">
+      <view class="food-item" wx:for="{{foods}}" wx:key="name">
+        <view class="food-info">
+          <view class="food-name-row">
+            <text class="food-name">{{item.name}}</text>
+            <text class="food-category" wx:if="{{!item.predicting}}">{{item.categoryIcon}} {{item.category}}</text>
+            <text class="food-category predicting" wx:else>AI分析中...</text>
+          </view>
+          <view class="food-meta">
+            <text class="food-shelf-life" wx:if="{{!item.predicting}}">保质期约 {{item.shelf_life_days}} 天</text>
+            <text class="food-shelf-life predicting" wx:else>预测中...</text>
+          </view>
+        </view>
+        <view class="food-actions">
+          <view class="btn-check {{item.checked ? 'checked' : ''}}" bindtap="toggleFood" data-index="{{index}}">
+            <text wx:if="{{item.checked}}">✓</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 手动添加 -->
+  <view class="add-section" bindtap="addManual">
+    <text class="add-icon">+</text>
+    <text class="add-text">手动添加食材</text>
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="bottom-bar">
+    <view class="btn-recipe" bindtap="onRecipeBtnTap">
+      <text>{{hasRecipes ? '换一批' : '获取菜谱推荐'}}</text>
+    </view>
+  </view>
+
+  <!-- 推荐菜谱浮动卡片 -->
+  <view class="recipe-popup" wx:if="{{showRecipePopup}}" bindtap="closeRecipePopup">
+    <view class="popup-mask"></view>
+      <view class="popup-content" catchtap="preventClose">
+      <!-- 标题 -->
+      <view class="popup-header">
+        <text class="popup-title">推荐菜谱</text>
+        <text class="popup-close" bindtap="closeRecipePopup">✕</text>
+      </view>
+      
+      <!-- AI推荐说明 -->
+      <view class="popup-tip" wx:if="{{recommendMessage}}">
+        <icon-svg name="lightbulb" size="32"></icon-svg>
+        <text class="tip-text">{{recommendMessage}}</text>
+      </view>
+      
+      <!-- 菜谱列表 -->
+      <scroll-view class="popup-list" scroll-y="true">
+        <view class="popup-recipe-item" wx:for="{{recipes}}" wx:key="id" 
+              bindtap="goToRecipe" data-id="{{item.id}}">
+          <view class="popup-recipe-main">
+            <text class="popup-recipe-name">{{item.name}}</text>
+            <text class="popup-recipe-desc">{{item.desc}}</text>
+          </view>
+          <view class="popup-recipe-tags">
+            <text class="popup-tag" wx:if="{{item.time}}">
+              <icon-svg name="clock" size="24"></icon-svg> {{item.time}}
+            </text>
+            <text class="popup-tag" wx:if="{{item.difficulty}}">
+              <icon-svg name="chart" size="24"></icon-svg> {{item.difficulty}}
+            </text>
+            <text class="popup-match" wx:if="{{item.match}}">
+              <icon-svg name="sparkles" size="24"></icon-svg> 匹配 {{item.match}}%
+            </text>
+          </view>
+        </view>
+      </scroll-view>
+      
+      <!-- 底部按钮 -->
+      <view class="popup-footer">
+        <view class="popup-btn-refresh" bindtap="refreshRecipes">
+          <icon-svg name="refresh" size="28"></icon-svg>
+          <text>换一批</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

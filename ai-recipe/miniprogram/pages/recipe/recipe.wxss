@@ -1,0 +1,518 @@
+/* 菜谱详情页面样式 */
+
+/* 头部封面 */
+.recipe-header {
+  width: 100%;
+  height: 420rpx;
+  position: relative;
+  margin-bottom: 32rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.recipe-cover {
+  width: 100%;
+  height: 100%;
+}
+
+.recipe-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  padding: 48rpx 28rpx 28rpx;
+}
+
+.recipe-name {
+  font-size: 42rpx;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12rpx;
+  display: block;
+}
+
+.recipe-meta {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.meta-item {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.meta-divider {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* 通用区块 */
+.section {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 28rpx;
+  margin: 0 10rpx 24rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1A1A1A;
+  margin-bottom: 20rpx;
+  padding-left: 16rpx;
+  border-left: 6rpx solid #E8722A;
+}
+
+.recipe-desc {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.8;
+}
+
+/* 营养成分 */
+.nutrition-grid {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nutrition-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.nutrition-value {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #E8722A;
+}
+
+.nutrition-label {
+  font-size: 22rpx;
+  color: #999;
+}
+
+/* 食材清单 */
+.ingredient-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ingredient-item {
+  display: flex;
+  align-items: center;
+  padding: 18rpx 0;
+  border-bottom: 1rpx solid #F0F0F0;
+}
+
+.ingredient-item:last-child {
+  border-bottom: none;
+}
+
+.ingredient-name {
+  flex: 1;
+  font-size: 28rpx;
+  color: #1A1A1A;
+}
+
+.ingredient-amount {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 烹饪步骤 */
+.step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28rpx;
+}
+
+.step-item {
+  display: flex;
+  gap: 24rpx;
+}
+
+.step-number {
+  width: 48rpx;
+  height: 48rpx;
+  background: #1A1A1A;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-text {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* 小贴士 */
+.tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16rpx;
+}
+
+.tip-icon {
+  font-size: 28rpx;
+}
+
+.tip-text {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* 底部占位 */
+.bottom-placeholder {
+  height: 160rpx;
+}
+
+/* 底部操作栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 16rpx;
+  padding: 20rpx 24rpx;
+  background: #FFFFFF;
+  box-shadow: 0 -4rpx 12rpx rgba(0, 0, 0, 0.05);
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+}
+
+.btn-favorite {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12rpx 24rpx;
+  background: #FFF3E0;
+  border-radius: 12rpx;
+}
+
+.btn-favorite:active {
+  transform: scale(0.95);
+}
+
+.favorite-icon {
+  font-size: 32rpx;
+}
+
+.favorite-text {
+  font-size: 20rpx;
+  color: #E8722A;
+}
+
+.btn-nutrition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12rpx 24rpx;
+  background: #E8F5E9;
+  border-radius: 12rpx;
+}
+
+.btn-nutrition:active {
+  transform: scale(0.95);
+}
+
+.nutrition-icon {
+  font-size: 32rpx;
+}
+
+.nutrition-text {
+  font-size: 20rpx;
+  color: #2E7D32;
+}
+
+.btn-start {
+  flex: 1;
+  background: #1A1A1A;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-start:active {
+  transform: scale(0.98);
+}
+
+.btn-start text {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* ========== 做菜模式 ========== */
+.cook-mode {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cook-mode-content {
+  width: 85%;
+  max-width: 600rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 48rpx 36rpx;
+  position: relative;
+}
+
+/* 关闭按钮 */
+.cook-close {
+  position: absolute;
+  top: 24rpx;
+  right: 24rpx;
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cook-close text {
+  font-size: 32rpx;
+  color: #999;
+}
+
+/* 菜名标题 */
+.cook-title {
+  text-align: center;
+  margin-bottom: 32rpx;
+}
+
+.cook-title text {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1A1A1A;
+}
+
+/* 进度条 */
+.cook-progress {
+  margin-bottom: 40rpx;
+}
+
+.cook-progress text {
+  font-size: 24rpx;
+  color: #999;
+  display: block;
+  text-align: center;
+  margin-bottom: 12rpx;
+}
+
+.progress-bar {
+  height: 8rpx;
+  background: #F0F0F0;
+  border-radius: 4rpx;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #1A1A1A;
+  border-radius: 4rpx;
+  transition: width 0.3s ease;
+}
+
+/* 步骤内容 */
+.cook-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24rpx;
+  padding: 40rpx 0;
+  min-height: 200rpx;
+  justify-content: center;
+}
+
+.cook-step-number {
+  width: 80rpx;
+  height: 80rpx;
+  background: #1A1A1A;
+  color: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+.cook-step-desc {
+  font-size: 30rpx;
+  color: #333;
+  line-height: 1.8;
+  text-align: center;
+}
+
+/* 操作按钮 */
+.cook-actions {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 40rpx;
+}
+
+.cook-btn {
+  flex: 1;
+  padding: 24rpx;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cook-btn text {
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.cook-btn-prev {
+  background: #F5F5F3;
+}
+
+.cook-btn-prev text {
+  color: #666;
+}
+
+.cook-btn-prev.disabled {
+  opacity: 0.5;
+}
+
+.cook-btn-next {
+  background: #1A1A1A;
+}
+
+.cook-btn-next text {
+  color: #FFFFFF;
+}
+
+.cook-btn-finish {
+  background: #2E7D32;
+}
+
+.cook-btn-finish text {
+  color: #FFFFFF;
+}
+
+.cook-btn:active {
+  transform: scale(0.98);
+}
+
+/* 语音控制区域 */
+.voice-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx 40rpx;
+  gap: 40rpx;
+}
+
+.voice-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.voice-icon {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background: rgba(232, 114, 42, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.voice-icon.active {
+  background: rgba(232, 114, 42, 0.2);
+}
+
+.voice-text {
+  font-size: 24rpx;
+  color: #6B5B4E;
+}
+
+.voice-replay {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  color: #E8722A;
+  font-size: 24rpx;
+}
+
+.voice-playing {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  color: #E8722A;
+  font-size: 24rpx;
+}
+
+/* 波浪动画 */
+.wave-animation {
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+  height: 30rpx;
+}
+
+.wave-bar {
+  width: 6rpx;
+  height: 100%;
+  background: #E8722A;
+  border-radius: 3rpx;
+  animation: wave 1.2s infinite ease-in-out;
+}
+
+.wave-bar:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.wave-bar:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.wave-bar:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: scaleY(0.5);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}

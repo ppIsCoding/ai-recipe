@@ -1,0 +1,431 @@
+/* 首页样式 - 温暖极简风 */
+
+.container {
+  padding-bottom: 40rpx;
+  background: var(--color-background);
+  min-height: 100vh;
+}
+
+/* ========== 顶部信息栏 ========== */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12rpx 10rpx 24rpx;
+}
+
+.top-bar-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.top-greeting {
+  font-size: 44rpx;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  letter-spacing: 1rpx;
+}
+
+.top-subtitle {
+  font-size: 24rpx;
+  color: var(--color-text-muted);
+  margin-top: 6rpx;
+  letter-spacing: 1rpx;
+}
+
+.top-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3rpx solid var(--color-border);
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+}
+
+/* ========== 拍照识别卡片 ========== */
+.camera-card {
+  margin: 0 10rpx 28rpx;
+  padding: 32rpx;
+  background: linear-gradient(135deg, #E8722A 0%, #F5A623 100%);
+  border-radius: 24rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 12rpx 40rpx rgba(232, 114, 42, 0.25);
+  transition: all 0.2s ease;
+}
+
+.camera-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 6rpx 20rpx rgba(232, 114, 42, 0.2);
+}
+
+.camera-card-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.camera-card-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1rpx;
+}
+
+.camera-card-desc {
+  font-size: 24rpx;
+  color: rgba(255,255,255,0.8);
+}
+
+.camera-card-btn {
+  width: 88rpx;
+  height: 88rpx;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-card-icon {
+  width: 44rpx;
+  height: 44rpx;
+}
+
+/* ========== 筛选区域 ========== */
+.filter-area {
+  padding: 0 10rpx 8rpx;
+}
+
+.filter-chips {
+  display: flex;
+  gap: 12rpx;
+  margin-bottom: 12rpx;
+}
+
+.filter-chips:last-child {
+  margin-bottom: 0;
+}
+
+/* ========== 标签基础样式 ========== */
+.chip {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14rpx 0;
+  background: var(--color-surface);
+  border-radius: 100rpx;
+  border: 2rpx solid var(--color-border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chip text {
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.chip:active {
+  transform: scale(0.95);
+}
+
+/* ========== 健康标签选中态 ========== */
+.chip.health-chip.active {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  border-color: transparent;
+  box-shadow: 0 4rpx 16rpx rgba(232, 114, 42, 0.3);
+}
+
+.chip.health-chip.active text {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ========== 时间标签选中态 ========== */
+.chip.time-chip.active {
+  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+  border-color: transparent;
+  box-shadow: 0 4rpx 16rpx rgba(212, 96, 14, 0.3);
+}
+
+.chip.time-chip.active text {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ========== 选中弹性动画 ========== */
+.chip.active {
+  animation: chipBounce 0.3s ease;
+}
+
+@keyframes chipBounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+/* ========== 推荐菜谱区域 ========== */
+.recommend-section {
+  padding: 24rpx 10rpx 0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.section-right {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.section-count {
+  font-size: 24rpx;
+  color: var(--color-text-muted);
+}
+
+.btn-refresh-text {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  transition: all 0.2s ease;
+}
+
+.btn-refresh-text text {
+  font-size: 24rpx;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.btn-refresh-text:active {
+  opacity: 0.6;
+}
+
+/* ========== 骨架屏 ========== */
+.skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.skeleton-card {
+  display: flex;
+  background: var(--color-surface);
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.skeleton-image {
+  width: 200rpx;
+  height: 180rpx;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  flex-shrink: 0;
+}
+
+.skeleton-info {
+  flex: 1;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.skeleton-line {
+  border-radius: 8rpx;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-title { width: 55%; height: 30rpx; }
+.skeleton-desc { width: 85%; height: 22rpx; }
+.skeleton-tags { display: flex; gap: 8rpx; }
+.skeleton-tag { width: 72rpx; height: 26rpx; border-radius: 8rpx; background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ========== 菜谱卡片 ========== */
+.recipe-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.recipe-card {
+  display: flex;
+  background: var(--color-surface);
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1rpx solid var(--color-border);
+  transition: all 0.2s ease;
+}
+
+.recipe-card:active {
+  transform: scale(0.98);
+}
+
+.recipe-image-wrapper {
+  width: 200rpx;
+  height: 180rpx;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.recipe-image {
+  width: 100%;
+  height: 100%;
+}
+
+.recipe-info {
+  flex: 1;
+  padding: 16rpx 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.recipe-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12rpx;
+}
+
+.recipe-name {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  flex: 1;
+}
+
+.recipe-time {
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+  flex-shrink: 0;
+}
+
+.recipe-time text {
+  font-size: 20rpx;
+  color: var(--color-text-muted);
+}
+
+.recipe-desc {
+  font-size: 22rpx;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 6rpx 0;
+}
+
+.recipe-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recipe-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6rpx;
+}
+
+.recipe-tag {
+  font-size: 18rpx;
+  padding: 2rpx 12rpx;
+  border-radius: 6rpx;
+  font-weight: 500;
+}
+
+.tag-cook {
+  background: #FFF3E0;
+  color: #E65100;
+}
+
+.tag-protein {
+  background: #E8F5E9;
+  color: #2E7D32;
+}
+
+.tag-oil {
+  background: #E3F2FD;
+  color: #1565C0;
+}
+
+.tag-salt {
+  background: #F3E5F5;
+  color: #7B1FA2;
+}
+
+.tag-default {
+  background: #F5F5F5;
+  color: #666;
+}
+
+.recipe-cal {
+  font-size: 20rpx;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+/* ========== 空状态 ========== */
+.empty-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 0 40rpx;
+}
+
+.empty-icon {
+  width: 120rpx;
+  height: 120rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  border-radius: 50%;
+  margin-bottom: 20rpx;
+  opacity: 0.4;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: 8rpx;
+}
+
+.empty-hint {
+  font-size: 24rpx;
+  color: var(--color-text-muted);
+}

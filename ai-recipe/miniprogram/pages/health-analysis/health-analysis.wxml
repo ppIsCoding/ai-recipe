@@ -1,0 +1,128 @@
+<!-- 健康分析页面 -->
+<view class="container">
+  <!-- 加载中 -->
+  <view class="loading-section" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">正在分析...</text>
+  </view>
+
+  <!-- 未填写个人信息 -->
+  <view class="empty-section" wx:if="{{!loading && !hasData}}">
+    <text class="empty-icon">📋</text>
+    <text class="empty-title">请先完善个人信息</text>
+    <text class="empty-desc">填写性别、年龄、身高、体重后，即可获取健康分析</text>
+    <view class="btn-edit" bindtap="goToProfileEdit">
+      <text>去填写</text>
+    </view>
+  </view>
+
+  <!-- 健康分析内容 -->
+  <view class="analysis-content" wx:if="{{!loading && hasData}}">
+    <!-- BMI 卡片 -->
+    <view class="bmi-card">
+      <view class="bmi-header">
+        <text class="bmi-title">BMI 指数</text>
+        <text class="bmi-subtitle">身体质量指数</text>
+      </view>
+      <view class="bmi-main">
+        <view class="bmi-value-wrapper">
+          <text class="bmi-value">{{bmi}}</text>
+          <text class="bmi-unit">kg/m²</text>
+        </view>
+        <view class="bmi-status {{bmiStatusClass}}">
+          <text>{{bmiStatus}}</text>
+        </view>
+      </view>
+      <view class="bmi-scale">
+        <view class="scale-item underweight">
+          <text>偏瘦</text>
+          <text>&lt;18.5</text>
+        </view>
+        <view class="scale-item normal">
+          <text>正常</text>
+          <text>18.5-24</text>
+        </view>
+        <view class="scale-item overweight">
+          <text>超重</text>
+          <text>24-28</text>
+        </view>
+        <view class="scale-item obese">
+          <text>肥胖</text>
+          <text>≥28</text>
+        </view>
+      </view>
+      <text class="bmi-note">* 中国标准（参考《中国成人超重和肥胖症预防控制指南》）</text>
+    </view>
+
+    <!-- 代谢数据 -->
+    <view class="metabolism-card">
+      <view class="card-title">代谢数据</view>
+      <view class="metabolism-grid">
+        <view class="metabolism-item">
+          <text class="metabolism-value">{{bmr}}</text>
+          <text class="metabolism-label">基础代谢率</text>
+          <text class="metabolism-unit">kcal/天</text>
+        </view>
+        <view class="metabolism-item">
+          <text class="metabolism-value">{{tdee}}</text>
+          <text class="metabolism-label">每日总消耗</text>
+          <text class="metabolism-unit">kcal/天</text>
+        </view>
+        <view class="metabolism-item highlight">
+          <text class="metabolism-value">{{targetCalories}}</text>
+          <text class="metabolism-label">推荐摄入</text>
+          <text class="metabolism-unit">kcal/天</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 营养目标 -->
+    <view class="nutrition-card">
+      <view class="card-title">每日营养目标</view>
+      <view class="nutrition-grid">
+        <view class="nutrition-item">
+          <text class="nutrition-icon">🥩</text>
+          <text class="nutrition-label">蛋白质</text>
+          <text class="nutrition-value">{{proteinTarget}}</text>
+        </view>
+        <view class="nutrition-item">
+          <text class="nutrition-icon">🫒</text>
+          <text class="nutrition-label">脂肪</text>
+          <text class="nutrition-value">{{fatTarget}}</text>
+        </view>
+        <view class="nutrition-item">
+          <text class="nutrition-icon">🍚</text>
+          <text class="nutrition-label">碳水</text>
+          <text class="nutrition-value">{{carbsTarget}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 健康建议 -->
+    <view class="advice-card">
+      <view class="card-title">健康建议</view>
+      <view class="advice-list">
+        <view class="advice-item" wx:for="{{healthAdvice}}" wx:key="*this">
+          <text class="advice-icon">✓</text>
+          <text class="advice-text">{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 膳食指南小贴士 -->
+    <view class="guide-card">
+      <view class="card-title">《中国居民膳食指南2022》</view>
+      <view class="guide-list">
+        <view class="guide-item" wx:for="{{dietaryGuideTips}}" wx:key="*this">
+          <text class="guide-icon">📌</text>
+          <text class="guide-text">{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 编辑按钮 -->
+    <view class="btn-edit-profile" bindtap="goToProfileEdit">
+      <text>修改个人信息</text>
+    </view>
+  </view>
+</view>

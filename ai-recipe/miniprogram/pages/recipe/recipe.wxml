@@ -1,0 +1,188 @@
+<!-- 菜谱详情页面 -->
+<view class="container">
+  <!-- 菜谱头部 -->
+  <view class="recipe-header">
+    <image class="recipe-cover" src="{{recipe.image}}" mode="aspectFill"></image>
+    <view class="recipe-overlay">
+      <text class="recipe-name">{{recipe.name}}</text>
+      <view class="recipe-meta">
+        <text class="meta-item">{{recipe.time}}</text>
+        <text class="meta-divider">|</text>
+        <text class="meta-item">{{recipe.difficulty}}</text>
+        <text class="meta-divider">|</text>
+        <text class="meta-item">{{recipe.servings}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 菜谱简介 -->
+  <view class="section">
+    <view class="section-title">菜谱简介</view>
+    <text class="recipe-desc">{{recipe.desc}}</text>
+  </view>
+
+  <!-- 营养成分 -->
+  <view class="section">
+    <view class="section-title">营养成分</view>
+    <view class="nutrition-list">
+      <view class="nutrition-row">
+        <view class="nutrition-info">
+          <text class="nutrition-name">热量</text>
+          <text class="nutrition-val">{{recipe.nutrition.calories}} kcal</text>
+        </view>
+        <view class="nutrition-bar">
+          <view class="nutrition-fill fill-calories" style="width: {{caloriesPercent}}%"></view>
+        </view>
+      </view>
+      <view class="nutrition-row">
+        <view class="nutrition-info">
+          <text class="nutrition-name">蛋白质</text>
+          <text class="nutrition-val">{{recipe.nutrition.protein}} g</text>
+        </view>
+        <view class="nutrition-bar">
+          <view class="nutrition-fill fill-protein" style="width: {{proteinPercent}}%"></view>
+        </view>
+      </view>
+      <view class="nutrition-row">
+        <view class="nutrition-info">
+          <text class="nutrition-name">脂肪</text>
+          <text class="nutrition-val">{{recipe.nutrition.fat}} g</text>
+        </view>
+        <view class="nutrition-bar">
+          <view class="nutrition-fill fill-fat" style="width: {{fatPercent}}%"></view>
+        </view>
+      </view>
+      <view class="nutrition-row">
+        <view class="nutrition-info">
+          <text class="nutrition-name">碳水</text>
+          <text class="nutrition-val">{{recipe.nutrition.carbs}} g</text>
+        </view>
+        <view class="nutrition-bar">
+          <view class="nutrition-fill fill-carbs" style="width: {{carbsPercent}}%"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 食材清单 -->
+  <view class="section">
+    <view class="section-title">食材清单</view>
+    <view class="ingredient-list">
+      <view class="ingredient-item" wx:for="{{recipe.ingredients}}" wx:key="name">
+        <text class="ingredient-name">{{item.name}}</text>
+        <text class="ingredient-amount">{{item.amount}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 烹饪步骤 -->
+  <view class="section">
+    <view class="section-title">烹饪步骤</view>
+    <view class="step-list">
+      <view class="step-item" wx:for="{{recipe.steps}}" wx:key="step">
+        <view class="step-left">
+          <view class="step-dot">{{item.step}}</view>
+          <view class="step-line" wx:if="{{index < recipe.steps.length - 1}}"></view>
+        </view>
+        <view class="step-right">
+          <text class="step-text">{{item.desc}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 小贴士 -->
+  <view class="section" wx:if="{{recipe.tips.length > 0}}">
+    <view class="section-title">小贴士</view>
+    <view class="tips-list">
+      <view class="tip-item" wx:for="{{recipe.tips}}" wx:key="*this">
+        <icon-svg name="lightbulb" size="32"></icon-svg>
+        <text class="tip-text">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部占位 -->
+  <view class="bottom-placeholder"></view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="btn-favorite" bindtap="toggleFavorite">
+      <icon-svg name="{{isFavorite ? 'heart-filled' : 'heart'}}" size="40"></icon-svg>
+      <text class="favorite-text">{{isFavorite ? '已收藏' : '收藏'}}</text>
+    </view>
+    <view class="btn-nutrition" bindtap="goToNutrition">
+      <icon-svg name="microscope" size="40"></icon-svg>
+      <text class="nutrition-text">营养分析</text>
+    </view>
+    <view class="btn-start" bindtap="startCook">
+      <text>开始做菜</text>
+    </view>
+  </view>
+
+  <!-- 做菜模式遮罩 -->
+  <view class="cook-mode" wx:if="{{showCookMode}}">
+    <view class="cook-mode-content">
+      <!-- 关闭按钮 -->
+      <view class="cook-close" bindtap="closeCookMode">
+        <text>✕</text>
+      </view>
+
+      <!-- 步骤标题 -->
+      <view class="cook-title">
+        <text>{{recipe.name}}</text>
+      </view>
+
+      <!-- 步骤进度 -->
+      <view class="cook-progress">
+        <text>步骤 {{currentStep + 1}} / {{totalSteps}}</text>
+        <view class="progress-bar">
+          <view class="progress-fill" style="width: {{(currentStep + 1) / totalSteps * 100}}%"></view>
+        </view>
+      </view>
+
+      <!-- 步骤内容 -->
+      <view class="cook-step">
+        <view class="cook-step-number">
+          <text>{{currentStep + 1}}</text>
+        </view>
+        <text class="cook-step-desc">{{currentStepDesc}}</text>
+      </view>
+
+      <!-- 语音控制 -->
+      <view class="voice-control">
+        <view class="voice-toggle" bindtap="toggleVoice">
+          <view class="voice-icon {{voiceEnabled ? 'active' : ''}}">
+            <icon-svg name="{{voiceEnabled ? 'voice' : 'voice-off'}}" size="32"></icon-svg>
+          </view>
+          <text class="voice-text">{{voiceEnabled ? '语音开启' : '语音关闭'}}</text>
+        </view>
+        <view class="voice-replay" wx:if="{{voiceEnabled && !isSpeaking}}" bindtap="speakStep">
+          <icon-svg name="refresh" size="24"></icon-svg>
+          <text>重新播报</text>
+        </view>
+        <view class="voice-playing" wx:if="{{isSpeaking}}">
+          <view class="wave-animation">
+            <view class="wave-bar"></view>
+            <view class="wave-bar"></view>
+            <view class="wave-bar"></view>
+          </view>
+          <text>播报中...</text>
+        </view>
+      </view>
+
+      <!-- 操作按钮 -->
+      <view class="cook-actions">
+        <view class="cook-btn cook-btn-prev {{isFirstStep ? 'disabled' : ''}}" bindtap="prevStep">
+          <text>上一步</text>
+        </view>
+        <view class="cook-btn cook-btn-next" wx:if="{{!isLastStep}}" bindtap="nextStep">
+          <text>下一步</text>
+        </view>
+        <view class="cook-btn cook-btn-finish" wx:if="{{isLastStep}}" bindtap="finishCook">
+          <text>完成</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,44 @@
+<!-- 做菜历史页面 -->
+<view class="container">
+  <!-- 空状态 -->
+  <view class="empty" wx:if="{{!loading && history.length === 0}}">
+    <icon-svg name="book" size="80"></icon-svg>
+    <text class="empty-text">还没有做菜记录</text>
+    <view class="empty-btn" bindtap="goBack">去做菜</view>
+  </view>
+
+  <!-- 历史列表 -->
+  <view class="list" wx:if="{{history.length > 0}}">
+    <view class="item" wx:for="{{history}}" wx:key="id">
+      <view class="item-main" bindtap="goToRecipe" data-id="{{item.recipe_id}}">
+        <image class="item-image" wx:if="{{item.image_url}}" src="{{item.image_url}}" mode="aspectFill"></image>
+        <view class="item-left">
+          <text class="item-name">{{item.recipe_name}}</text>
+          <text class="item-time">{{item.created_at}}</text>
+          <view class="item-rating">
+            <icon-svg wx:for="{{5}}" wx:for-index="starIndex" wx:key="starIndex" name="{{starIndex < item.rating ? 'star' : 'star-empty'}}" size="28"></icon-svg>
+          </view>
+        </view>
+        <view class="item-right">
+          <text class="cook-time" wx:if="{{item.cook_time > 0}}">{{item.cook_time}}分钟</text>
+        </view>
+      </view>
+      <view class="item-note" wx:if="{{item.note}}">
+        <text>{{item.note}}</text>
+      </view>
+      <view class="item-delete" catchtap="deleteRecord" data-id="{{item.id}}">
+        <icon-svg name="delete" size="32"></icon-svg>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="load-more" wx:if="{{hasMore && !loading}}" bindtap="loadMore">
+    <text>加载更多</text>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

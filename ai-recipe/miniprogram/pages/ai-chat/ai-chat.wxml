@@ -1,0 +1,93 @@
+<!-- AI助手页面 - 简洁现代风格 -->
+<view class="container">
+  <!-- 聊天消息列表 -->
+  <scroll-view 
+    class="chat-list" 
+    scroll-y 
+    scroll-into-view="{{scrollToView}}"
+    scroll-with-animation
+  >
+    <!-- 欢迎区域 - 仅在无消息时显示 -->
+    <view class="welcome" wx:if="{{showQuickQuestions}}">
+      <view class="welcome-icon">
+        <image class="welcome-img" src="/images/ai.png" mode="aspectFit"></image>
+      </view>
+      <text class="welcome-title">今天想吃点什么？</text>
+      
+      <!-- 快捷问题 - 简洁列表 -->
+      <view class="prompt-list">
+        <view 
+          class="prompt-item" 
+          wx:for="{{quickQuestions}}" 
+          wx:key="id"
+          bindtap="sendQuickQuestion"
+          data-text="{{item.text}}"
+        >
+          <text class="prompt-icon">{{item.icon}}</text>
+          <text class="prompt-text">{{item.text}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 消息列表 -->
+    <view 
+      class="message-wrap {{item.role === 'user' ? 'is-user' : 'is-ai'}}"
+      wx:for="{{messages}}" 
+      wx:key="id"
+      id="{{item.id}}"
+    >
+      <view class="message-row">
+        <!-- AI头像 -->
+        <image class="msg-avatar" wx:if="{{item.role === 'assistant'}}" src="/images/ai.png" mode="aspectFit"></image>
+        
+        <!-- 消息气泡 -->
+        <view class="bubble {{item.role === 'user' ? 'bubble-user' : 'bubble-ai'}}">
+          <rich-text wx:if="{{item.role === 'assistant' && item.htmlContent}}" class="bubble-text" nodes="{{item.htmlContent}}" user-select></rich-text>
+          <text wx:else class="bubble-text" user-select>{{item.content}}</text>
+        </view>
+
+        <!-- 用户头像 -->
+        <image class="msg-avatar user-avatar" wx:if="{{item.role === 'user' && userAvatar}}" src="{{userAvatar}}" mode="aspectFill"></image>
+        <view class="msg-avatar user-avatar-default" wx:elif="{{item.role === 'user'}}">
+          <text class="user-icon">☺</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="message-wrap is-ai" wx:if="{{isLoading}}">
+      <view class="message-row">
+        <image class="msg-avatar" src="/images/ai.png" mode="aspectFit"></image>
+        <view class="bubble bubble-ai">
+          <view class="typing">
+            <view class="typing-dot"></view>
+            <view class="typing-dot"></view>
+            <view class="typing-dot"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部占位 -->
+    <view class="bottom-space"></view>
+  </scroll-view>
+
+  <!-- 输入区域 -->
+  <view class="input-bar">
+    <view class="input-inner">
+      <input 
+        class="msg-input"
+        placeholder="输入你的问题..."
+        placeholder-class="placeholder"
+        value="{{inputText}}"
+        bindinput="onInputChange"
+        bindconfirm="onConfirm"
+        confirm-type="send"
+        disabled="{{isLoading}}"
+      />
+      <view class="send-btn {{inputText ? 'on' : ''}}" bindtap="sendMessage">
+        <icon-svg name="send" size="32"></icon-svg>
+      </view>
+    </view>
+  </view>
+</view>

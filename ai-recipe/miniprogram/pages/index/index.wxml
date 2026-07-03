@@ -1,0 +1,122 @@
+<!-- 首页 - 今晚吃什么 -->
+<view class="container">
+  <!-- 顶部信息栏 -->
+  <view class="top-bar">
+    <view class="top-bar-left">
+      <text class="top-greeting">{{greeting}}</text>
+      <text class="top-subtitle">膳食指南推荐 · 吃得健康</text>
+    </view>
+    <view class="top-avatar" bindtap="goToProfile">
+      <image class="avatar-img" src="{{userInfo.avatar_url || '/images/user.png'}}" mode="aspectFill"></image>
+    </view>
+  </view>
+
+  <!-- 拍照识别卡片 -->
+  <view class="camera-card" bindtap="goToCamera">
+    <view class="camera-card-left">
+      <text class="camera-card-title">拍照识别食材</text>
+      <text class="camera-card-desc">拍一拍食材，AI帮你推荐菜谱</text>
+    </view>
+    <view class="camera-card-btn">
+      <icon-svg name="camera" size="44"></icon-svg>
+    </view>
+  </view>
+
+  <!-- 筛选区域 -->
+  <view class="filter-area">
+    <!-- 健康标签组 -->
+    <view class="filter-chips">
+      <view class="chip health-chip {{tag1Selected ? 'active' : ''}}" bindtap="toggleTag" data-tag="轻烹饪">
+        <text>轻烹饪</text>
+      </view>
+      <view class="chip health-chip {{tag2Selected ? 'active' : ''}}" bindtap="toggleTag" data-tag="少盐">
+        <text>少盐</text>
+      </view>
+      <view class="chip health-chip {{tag3Selected ? 'active' : ''}}" bindtap="toggleTag" data-tag="少油">
+        <text>少油</text>
+      </view>
+      <view class="chip health-chip {{tag4Selected ? 'active' : ''}}" bindtap="toggleTag" data-tag="高蛋白">
+        <text>高蛋白</text>
+      </view>
+    </view>
+
+    <!-- 时间筛选组 -->
+    <view class="filter-chips">
+      <view class="chip time-chip {{time15Selected ? 'active' : ''}}" bindtap="toggleTime" data-time="15">
+        <text>≤15分</text>
+      </view>
+      <view class="chip time-chip {{time30Selected ? 'active' : ''}}" bindtap="toggleTime" data-time="30">
+        <text>≤30分</text>
+      </view>
+      <view class="chip time-chip {{time45Selected ? 'active' : ''}}" bindtap="toggleTime" data-time="45">
+        <text>≤45分</text>
+      </view>
+      <view class="chip time-chip {{time60Selected ? 'active' : ''}}" bindtap="toggleTime" data-time="60">
+        <text>≤60分</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 推荐菜谱区域 -->
+  <view class="recommend-section">
+    <view class="section-header">
+      <text class="section-title">健康推荐</text>
+      <view class="section-right">
+        <text class="section-count" wx:if="{{!loading}}">{{filteredRecipes.length}}道</text>
+        <view class="btn-refresh-text" bindtap="refreshRecipes">
+          <icon-svg name="refresh" size="24"></icon-svg>
+          <text>换一批</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 骨架屏加载 -->
+    <view class="skeleton-list" wx:if="{{loading}}">
+      <view class="skeleton-card" wx:for="{{[1,2,3]}}" wx:key="*this">
+        <view class="skeleton-image"></view>
+        <view class="skeleton-info">
+          <view class="skeleton-line skeleton-title"></view>
+          <view class="skeleton-line skeleton-desc"></view>
+          <view class="skeleton-tags">
+            <view class="skeleton-tag"></view>
+            <view class="skeleton-tag"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 菜谱列表 -->
+    <view class="recipe-list" wx:if="{{!loading && filteredRecipes.length > 0}}">
+      <view class="recipe-card" wx:for="{{filteredRecipes}}" wx:key="id" bindtap="goToRecipe" data-id="{{item.id}}">
+        <view class="recipe-image-wrapper">
+          <image class="recipe-image" src="{{item.image_url || '/images/recipe/番茄炒蛋.png'}}" mode="aspectFill"></image>
+        </view>
+        <view class="recipe-info">
+          <view class="recipe-top">
+            <text class="recipe-name">{{item.name}}</text>
+            <view class="recipe-time">
+              <icon-svg name="clock" size="20"></icon-svg>
+              <text>{{item.cook_time || '15分钟'}}</text>
+            </view>
+          </view>
+          <text class="recipe-desc">{{item.desc}}</text>
+          <view class="recipe-bottom">
+            <view class="recipe-tags">
+              <text class="recipe-tag tag-{{tag == '轻烹饪' ? 'cook' : tag == '高蛋白' ? 'protein' : tag == '少油' ? 'oil' : tag == '少盐' ? 'salt' : 'default'}}" wx:for="{{item.health_tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+            </view>
+            <text class="recipe-cal">{{item.nutrition.calories || 0}}kcal</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-section" wx:if="{{!loading && filteredRecipes.length === 0}}">
+      <view class="empty-icon">
+        <icon-svg name="food" size="64"></icon-svg>
+      </view>
+      <text class="empty-text">没有找到匹配的菜谱</text>
+      <text class="empty-hint">试试调整筛选条件</text>
+    </view>
+  </view>
+</view>
